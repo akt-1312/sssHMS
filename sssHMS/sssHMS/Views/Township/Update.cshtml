@@ -1,0 +1,70 @@
+﻿@model sssHMS.Models.Township
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Township Update</h1>
+<form name="form1" method="post" asp-controller="Township" asp-action="Update">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden asp-for="TownshipId" />
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+
+
+    <div class="form-group col-md-5">
+        <label asp-for="State.Country" class="control-label"></label>
+        <select name="CountryId" id="CountryId"
+                asp-items="@ViewBag.Countries" onchange="DoPostBack();"
+                class="form-control"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    </div>
+    <div class="form-group col-md-5">
+        <label class="control-label">State</label>
+        <select name="StateId" asp-for="StateId" id="selectState"
+                asp-items="@ViewBag.States" class="form-control"></select>
+        <span asp-validation-for="StateId" class="text-danger">@ViewBag.ErrorMessage1</span>
+    </div>
+
+    <div class="form-group col-md-5">
+        <label asp-for="TownshipName" class="control-label"></label>
+        <input id="TownshipName" name="townshipName" asp-for="TownshipName" class="form-control" />
+        <span asp-validation-for="TownshipName" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group col-md-5">
+        <button type="button" id="btnSave" class="btn btn-success">Save</button>
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>
+
+    function DoPostBack() {
+        var select = document.getElementById("CountryId");
+        var option = select.options[select.selectedIndex];
+        if (option.value != "Select Country") {
+            document.form1.action = "/Township/GetStatesUpdate";
+            document.form1.submit();
+        }
+    }
+
+    $(document).ready(function () {
+        $("#TownshipName").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
+            $("#TownshipName").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSave").focus();
+                }
+            });
+    });
+    </script>
+}

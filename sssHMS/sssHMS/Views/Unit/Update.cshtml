@@ -1,0 +1,34 @@
+﻿@model sssHMS.Models.Unit
+@{
+    ViewData["Title"] = "Update";
+    var title = "Unit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@title Update</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    
+    <input type="hidden" asp-for="UnitID" name="returnUrl" value="@ViewBag.returnUrl" />
+    
+    @*<div class="form-group col-md-3">
+        <label asp-for="Department" class="control-label"></label>
+        <select asp-for="DepartmentID" class="form-control" asp-items="@(new SelectList(@ViewBag.DepList,"DepartmentID","DepartmentName"))"></select>
+    </div>*@
+    <div class="form-group col-md-5">
+        <label asp-for="UnitName" class="control-label"></label>
+        <input asp-for="UnitName" class="form-control" />
+        <span asp-validation-for="UnitName" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group col-md-3">
+        <button type="submit" class="btn btn-success">Update</button>
+        @*<input type="submit" class="btn btn-success" value="Update" />*@
+        @*<a class="btn btn-primary" onClick="history.go(-1); return false;">Back To List</a>*@
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To List</a>
+    </div>
+</form>
+
+

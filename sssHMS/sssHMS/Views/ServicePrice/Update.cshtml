@@ -1,0 +1,111 @@
+﻿@model sssHMS.Models.ServicePrice
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    <style>
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+        }
+    </style>
+}
+
+<h1>Update Service Price</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <input hidden asp-for="ServicePriceID" />
+
+    <div class="row my-3">
+        <div class="col-12">
+            <div class="row my-3">
+                <div class="col-md-2 offset-1">
+                    <label asp-for="ServiceID"></label>
+                </div>
+                <div class="col-md-4">
+                    <select asp-for="ServiceID" asp-items="ViewBag.Services" class="form-control"></select>
+                    <span asp-validation-for="ServiceID"></span>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-md-2 offset-1">
+                    <label asp-for="LocalPrice"></label>
+                </div>
+                <div class="col-md-4">
+                    <input id="LocalPrice" asp-for="LocalPrice" class="form-control" />
+                    <span asp-validation-for="LocalPrice"></span>
+                </div>
+            </div>
+
+
+            <div class="row my-3">
+                <div class="col-md-2 offset-1">
+                    <label asp-for="ForeignerFormulaPrice"></label>
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="ForeignerFormulaPrice" class="form-control" />
+                    <span asp-validation-for="ForeignerFormulaPrice"></span>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-md-2 offset-1">
+                    <label asp-for="ForeignerFixedPrice"></label>
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="ForeignerFixedPrice" class="form-control" />
+                    <span asp-validation-for="ForeignerFixedPrice"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row my-3">
+        <div class="form-group col-md-5 offset-3">
+            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+
+            <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+        </div>
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#LocalPrice").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
+            $('input,select').on("keypress", function (e) {
+                /* ENTER PRESSED*/
+                if (e.keyCode == 13) {
+                    /* FOCUS ELEMENT */
+                    var inputs = $(this).parents("form").eq(0).find(":input");
+                    var idx = inputs.index(this);
+
+                    if (idx == inputs.length - 1) {
+                        inputs[0].select()
+                    } else {
+                        $("#txtArea").on("keypress", function (e) {
+                            $("#txtPh1").focus();
+                        });
+                        inputs[idx + 1].focus(); //  handles submit buttons
+                        //inputs[idx + 1].select();
+                    }
+                    return false;
+                }
+            });
+        });
+    </script>
+}

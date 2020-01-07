@@ -1,0 +1,31 @@
+﻿@model sssHMS.Models.MaritalStatus
+@{
+    ViewData["Title"] = "Delete";
+    var title = "MaritalStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@title Delete</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden asp-for="MaritalStatusID" />
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+
+    <div class="form-group col-md-5">
+        <label asp-for="MaritalStatusName" class="control-label"></label>
+        <input asp-for="MaritalStatusName" class="form-control" readonly />
+
+    </div>
+
+    <div class="form-group col-md-3">
+        <button type="submit" class="btn btn-success">Delete</button>
+        @*<input type="submit" class="btn btn-success" value="Update" />*@
+        @*<a class="btn btn-primary" onClick="history.go(-1); return false;">Back To List</a>*@
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To List</a>
+    </div>
+</form>
+
+
+
+

@@ -1,0 +1,178 @@
+﻿@model sssHMS.Models.HospitalInfo
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    <style>
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+        }
+    </style>
+}
+
+
+<h3>Create Hospital Info</h3>
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <div class="row">
+        <div class="form-group col-8">
+            <div class="row my-3">
+                <div class="col-2 offset-2">
+                    <div><label class="control-label">Name&CODE</label></div>
+                </div>
+                <div class="col-4">
+                    <div>
+                        <input asp-for="HospitalName" class="form-control" />
+                        <span asp-validation-for="HospitalName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div>
+                        <input asp-for="HospitalCode" class="form-control" />
+                        <span asp-validation-for="HospitalCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-2 offset-2">
+                    <div>
+                        <label asp-for="HospitalAddress" class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div>
+                        <textarea id="txtArea" asp-for="HospitalAddress" class="form-control"></textarea>
+                        <span asp-validation-for="HospitalAddress" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-2 offset-2">
+                    <div><label asp-for="HospitalPhoneNo1"></label></div>
+                </div>
+                <div class="col-4">
+                    <div>
+                        <input id="txtPh1" asp-for="HospitalPhoneNo1" class="form-control" />
+                        <span asp-validation-for="HospitalPhoneNo1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div>
+                        <input asp-for="HospitalPhoneNo2" class="form-control" />
+                        <span asp-validation-for="HospitalPhoneNo2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-4 offset-4">
+                    <div>
+                        <input asp-for="HospitalPhoneNo3" class="form-control" />
+                        <span asp-validation-for="HospitalPhoneNo3" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div>
+                        <input asp-for="HospitalPhoneNo4" class="form-control" />
+                        <span asp-validation-for="HospitalPhoneNo4" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-2 offset-2">
+                    <div>
+                        <label asp-for="HospitalEmail" class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div>
+                        <input asp-for="HospitalEmail" class="form-control" />
+                        <span asp-validation-for="HospitalEmail" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-2 offset-2">
+                    <div>
+                        <label asp-for="HospitalWebsite" class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div>
+                        <input asp-for="HospitalWebsite" class="form-control" />
+                        <span asp-validation-for="HospitalWebsite" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2">
+                    <div>
+                        <label asp-for="HospitalImage" class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div>
+                        <input name="files" type="file" multiple class="form-control" />
+                        <span asp-validation-for="HospitalWebsite" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="form-group col-md-5 offset-4">
+                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                    <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+                </div>
+            </div>
+        </div>       
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#HospitalName").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input/*[type='text']*/").on("click", function () {
+                $(this).select();
+            });
+        $('input').on("keypress", function(e) {
+            /* ENTER PRESSED*/
+            if (e.keyCode == 13) {
+                /* FOCUS ELEMENT */
+                var inputs = $(this).parents("form").eq(0).find(":input");
+                var idx = inputs.index(this);
+
+                if (idx == inputs.length - 1) {
+                    inputs[0].select()
+                } else {
+                    $("#txtArea").on("keypress", function (e) {
+                        $("#txtPh1").focus();
+                    });
+                    inputs[idx + 1].focus(); //  handles submit buttons
+                    //inputs[idx + 1].select();
+                }
+                return false;
+            }
+        });
+        });
+    </script>
+
+}

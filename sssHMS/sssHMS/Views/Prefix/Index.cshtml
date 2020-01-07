@@ -1,0 +1,361 @@
+﻿@model sssHMS.Models.ViewModels.PrefixViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .rowClickColor {
+        background-color: lightblue;
+    }
+
+    .wt {
+        background-color: white;
+    }
+
+    .txtPageSize {
+        width: 50px;
+        padding: 7px 5px;
+        margin-right: 10px;
+        float: right;
+        border: none;
+        text-align: center;
+        outline: none;
+        box-shadow: none;
+    }
+
+        .txtPageSize::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            display: none;
+        }
+
+
+    .editableBox1, .editableBox2, .editableBox1:focus, .editableBox2:focus {
+        display: block;
+        width: 100%;
+        height: calc(2.25rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: aliceblue;
+        background-clip: padding-box;
+        border: none;
+        /*border-radius: 0.25rem;*/
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+       
+        
+    }
+
+
+        .editableBox1:focus, .editableBox2:focus {
+            outline: none;
+        }
+
+    .timeTextBox {
+        width: 54px;
+        margin-left: -78px;
+        height: 25px;
+        border: none;
+    }
+
+    #btnSearch {
+        background-color: #d0d6dc;
+        border: #d0d6db;
+        width:90px;
+      
+    }
+
+        #btnSearch:hover {
+            background-color: #d0d6dc;
+            border: #d0d6db;
+            opacity: 0.7;
+        }
+
+    .btnEdit, .btnDel {
+        background-color: #bcd1e8;
+        border: #bcd1e4;
+    }
+
+        .btnEdit:focus, .btnDel:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+    /*.searchNone {
+                            display: none;
+                        }
+
+                        .searchBlock {
+                            display: block;
+                        }*/
+    #searchMinus {
+        display: none;
+    }
+
+    #btnSearchPlusTow {
+        display: none;
+    }
+
+    /*select {
+                    text-align-last: right;
+                }*/
+    /*option {
+                    direction: ltr;
+                }*/
+    table {
+        table-layout: fixed;
+        width: 100%;
+        /*border-collapse:collapse;*/
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        /*word-wrap:break-word;*/
+    }
+
+    .table td {
+        padding: 0px;
+        vertical-align: middle;
+    }
+
+    .btnSort {
+        background-color: #70a6e4;
+        border: none;
+        color: black;
+        text-decoration: none;
+    }
+
+        .btnSort:focus {
+            outline: none;
+        }
+
+        .btnSort:hover {
+            cursor: pointer;
+        }
+
+    .btnSortActive {
+        color: gray;
+    }
+
+    .dis_able {
+        pointer-events: none;
+        color: lightgray;
+    }
+
+    tbody {
+        font-size: 14px;
+    }
+
+
+
+    
+
+</style>
+@{ 
+    ViewBag.textBox = "searchParam";
+}
+
+<form method="get">
+
+    <div class="container-fluid" style=" min-height:60px; background-color:aliceblue;">
+        <div class="row" style="padding:10px;">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-1" style="margin-top:8px;">
+                        <label>Prefix</label>
+                    </div>
+                    <div class="col-2">
+
+                        @Html.Editor((string)ViewBag.textBox, new { htmlAttributes = new { @class = "form-control", placeholder = "Search Prefix", autocomplete = "off" } })
+                    </div>
+                    <div class="col-1" style="text-align:left;">
+                        <button name="sortParam" value="@ViewBag.sortParamview" class="btn btn-primary form-control" id="btnSearch">
+                            <i class="fa fa-search fa-sm"></i>Search
+                        </button>
+                    </div>
+                    <div class="col-2" style="text-align:right" >
+                        <a asp-action="Index" asp-route-sortParam="@ViewBag.sortParamView" asp-route-PageSize="@ViewBag.PageSize" class="btn btn-outline-secondary border m1">Show All</a>
+                    </div>
+                </div>
+                
+                @*<div class="row">
+                    <div class="col-5">
+                        <div class="row wrapper">
+                            <div class="col-3">
+
+
+
+
+
+                            </div>
+                            <div class="col-5">
+
+                                @Html.Editor((string)ViewBag.textBox, new { htmlAttributes = new { @class = "form-control", placeholder = "Search Prefix", autocomplete = "off" } })
+                            </div>
+
+                            <div class="col-3">
+
+
+
+                                <button name="sortParam" value="@ViewBag.sortParamview" class="btn btn-primary form-control" id="btnSearch">
+                                    <i class="fa fa-search fa-sm"></i>Search
+                                </button>
+
+
+                            </div>
+                            <div class="col-1">
+                                <a asp-action="Index" asp-route-sortParam="@ViewBag.sortParamView" asp-route-PageSize="@ViewBag.PageSize" class="btn btn-outline-secondary border m1">Show All</a>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>*@
+            </div>
+        </div>
+    </div>
+   
+
+
+
+    <div class="container-fluid" style="margin-top:10px; background-color:aliceblue;position:relative;">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-8">
+                <a asp-action="Create" class="btn btn-primary mb-3 p-3 fa fa-plus-square" asp-route-returnUrl="@ViewBag.returnUrl">&nbsp; Add New Prefix</a>
+            </div>
+            <div class="form-row col-4" style="width:170px; position:absolute;right:0; margin:0;">
+                <div>
+                    @*@Html.Editor("PageSize",(string)ViewBag.PageSize, new { htmlAttributes = new { @class = "txtPageSize", @type = "number" } })*@
+                    <input type="number" name="PageSize" value="@ViewBag.PageSize" class="txtPageSize" />
+                </div>
+                <div>
+                    <label class="form-control" style="border:none; background-color:aliceblue;">Rows</label>
+                </div>
+
+            </div>
+
+
+            <div class="container-fluid" style="min-height:400px;">
+                <table class="table table-light table-bordered table-hover bg-transparent" id="myTable" style="/*min-width:1107px;*/">
+                    <thead style="background-color:#70a6e4;">
+                        <tr class="text-center">
+
+                            <th style="width:640px;">
+                                @Html.DisplayNameFor(m => m.Prefixes.FirstOrDefault().PrefixName)
+
+                                @if (ViewBag.sortParamView == "SortDec")
+                                {
+                                    <button name="sortParam" value="SortAsc" class="btnSort" id="btnSortDecName"><i class="fa fa-sort-up"></i></button>
+                                    @*<a asp-route-sortParam="SortAsc" class="btnSort" id="btnSortDecName"><i class="fa fa-sort-up"></i></a>*@
+
+                                }
+                                else
+                                {
+                                    <button name="sortParam" value="SortDec" class="btnSort" id="btnSortAscName"><i class="fa fa-sort-down"></i></button>
+                                    @*<a asp-route-sortParam="SortDec" class="btnSort" id="btnSortAscName"><i class="fa fa-sort-down"></i></a>*@
+
+                                }
+
+                            </th>
+                            <th>Operations</th>
+
+                            @*<th style="width:41px; border:none;"></th>
+                            <th style="width:41px; border:none;"></th>
+                            <th style="width:41px; border:none;"></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model == null)
+                        {
+                            <tr>
+                                <td>No Model Data!</td>
+                            </tr>
+
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.Prefixes)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @item.PrefixName
+                                    </td>
+
+                                    <td class="text-center form-group">
+                                        <a asp-action="Update" class="btn btn-primary btnEdit" asp-route-id="@item.PrefixID"><i class="fa fa-edit fa-sm"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.PrefixID" class="btn btn-danger btnDel"><i class="fa fa-trash-alt fa-sm"></i></a>
+                                        <a asp-action="Details" asp-route-id="@item.PrefixID" class="btn btn-secondary btnDel"><i class="fa fa-ellipsis-h fa-sm"></i></a>
+                                    </td>
+
+                                  
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+           
+
+            <div page-model="@Model.PagingInfo" page-action="Index"
+                 page-classes-enabled="true" page-class="btn border m-1"
+                 page-class-normal="btn btn-default active"
+                 page-class-selected="btn btn-primary active" page-last="fa fa-fast-forward"
+                 page-first="fa fa-fast-backward" page-prev="fa fa-backward" page-next="fa fa-forward"
+                 class="btn-group m-1 ml-2" disabled-page="dis_able"></div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        //for textbox focus select all text in textbox
+        $("input[type='text']").on("click", function () {
+            $(this).select();
+        });
+        //for being active soft button
+        var bb = "@ViewBag.sortParamView";
+        if (bb == "SortDec") {
+            $("#btnSortDecName").addClass("btnSortActive");
+        }
+        else if (bb == "SortNrcAsc") {
+            $("#btnSortAscNrc").addClass("btnSortActive");
+        }
+           
+        else {
+            $("#btnSortAscName").addClass("btnSortActive");
+        }
+
+
+        //for table row clicked color changing
+            $('#myTable tbody tr').click(function () {
+                $(this).toggleClass('rowClickColor');/*.siblings().removeClass('bg-success');*/
+                $(this).siblings().removeClass('rowClickColor');
+            });
+
+  
+
+        
+
+        });
+    </script>
+
+}
+
+
+

@@ -70,7 +70,7 @@ namespace sssHMS
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Township}/{action=Index}/{id?}");
             });
         }
     }

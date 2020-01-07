@@ -1,0 +1,438 @@
+﻿@model sssHMS.Models.ViewModels.TownshipViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    <style>
+        .rowClickColor {
+            background-color: lightblue;
+        }
+
+        .wt {
+            background-color: white;
+        }
+
+        .txtPageSize {
+            width: 50px;
+            padding: 7px 5px;
+            margin-right: 10px;
+            float: right;
+            border: none;
+            text-align: center;
+            outline: none;
+            box-shadow: none;
+        }
+
+            .txtPageSize::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                display: none;
+            }
+
+
+        .editableBox1, .editableBox2, .editableBox1:focus, .editableBox2:focus {
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: aliceblue;
+            background-clip: padding-box;
+            border: none;
+            /*border-radius: 0.25rem;*/
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background-image: url('https://maxcdn.icons8.com/Share/icon/Arrows//expand_arrow1600.png');
+            background-repeat: no-repeat;
+            background-size: 15px;
+            background-position: right center;
+            background-position-x: 80%;
+        }
+
+
+            .editableBox1:focus, .editableBox2:focus {
+                outline: none;
+            }
+
+        .timeTextBox {
+            width: 54px;
+            margin-left: -78px;
+            height: 25px;
+            border: none;
+        }
+
+        #btnSearch {
+            background-color: #d0d6dc;
+            border: #d0d6db;
+        }
+
+            #btnSearch:hover {
+                background-color: #d0d6dc;
+                border: #d0d6db;
+                opacity: 0.7;
+            }
+
+        .btnEdit, .btnDel {
+            background-color: #bcd1e8;
+            border: #bcd1e4;
+        }
+
+            .btnEdit:focus, .btnDel:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+        /*.searchNone {
+                            display: none;
+                        }
+
+                        .searchBlock {
+                            display: block;
+                        }*/
+        #searchMinus {
+            display: none;
+        }
+
+        #btnSearchPlusTow {
+            display: none;
+        }
+
+        /*select {
+                    text-align-last: right;
+                }*/
+        /*option {
+                    direction: ltr;
+                }*/
+        table {
+            table-layout: fixed;
+            width: 100%;
+            /*border-collapse:collapse;*/
+        }
+
+        td {
+            overflow: hidden;
+            white-space: nowrap;
+            /*word-wrap:break-word;*/
+        }
+
+        .table td {
+            padding: 0px;
+            vertical-align: middle;
+        }
+
+        .btnSort {
+            background-color: #70a6e4;
+            border: none;
+            color: black;
+            text-decoration: none;
+        }
+
+            .btnSort:focus {
+                outline: none;
+            }
+
+            .btnSort:hover {
+                cursor: pointer;
+            }
+
+        .btnSortActive {
+            color: gray;
+        }
+
+        .dis_able {
+            pointer-events: none;
+            color: lightgray;
+        }
+
+        tbody {
+            font-size: 14px;
+        }
+
+
+
+        /*.btn:focus{
+                    box-shadow:none;
+                }*/
+
+        /*.btn:focus, .btn:active:focus, .btn.active:focus,
+                .btn.focus, .btn:active.focus, .btn.active.focus {
+                    outline: none;
+                    box-shadow:none;
+                }*/
+
+        /*.sortAsc{
+                    display:none;
+                }*/
+
+        /*@@media screen and (max-width: 600px) {
+          table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+          }
+
+          table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+          }
+
+          table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            text-align: right;
+          }
+
+          table td::before {
+            content: attr(data-label);
+            float: left;
+          }
+        }*/
+
+    </style>
+
+
+}
+@{
+    ViewBag.textBox = "searchParam";
+    ViewBag.textBox1 = "searchParam1";
+
+
+
+    //ViewBag.sortParam = null;
+
+    //string searchParam = ViewBag.test;
+    //ViewBag.seP = searchParam;
+
+}
+
+<form method="get" name="form2" asp-controller="Township" asp-action="Index">
+
+    @*searching with one parameter*@
+
+    <div class="container-fluid" style=" min-height:60px; background-color:aliceblue;">
+        <div class="row" style="padding:10px 0px;">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="row wrapper">
+                            <div class="col-4">
+                                <div class="">
+                                    <div>
+                                        @*<select name="CountryId" id="country"
+                                               onchange="DoPostBack();" class="form-control" asp-items="@ViewBag.Countries"></select>*@
+                                    <select name="CountryId" id="CountryId" class="form-control" 
+                                            asp-items="@ViewBag.Countries"></select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                <div class="">
+                                    <div>
+                                        <select id="stateId" asp-for="Townships.FirstOrDefault().StateId" class="form-control" 
+                                        disabled="@(ViewBag.StateEnabled == false ? "disabled" : null)" 
+                                            asp-items="@ViewBag.States"></select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                @Html.Editor((string)ViewBag.textBox, new { htmlAttributes = new { @class = "form-control searchTextBox1", placeholder = "Enter Township", autocomplete = "off" } })
+                            </div>
+
+                            @*<input class="timeTextBox" placeholder="Search" name="timebox" maxlength="5" />*@
+                        </div>
+                    </div>
+
+                    <div class="col-1">
+                        <div class="row">
+
+                            <button name="sortParam" value="@ViewBag.sortParamView" class="btn btn-primary" id="btnSearch">
+                                <i class="fa fa-search fa-sm"></i>Search
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div class="col-1" @*style="margin:8px;"*@>
+                        <a asp-action="Index" asp-route-sortParam="@ViewBag.sortParamView" asp-route-PageSize="@ViewBag.PageSize" class="btn btn-outline-secondary border m1">Show All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*for Index Div*@
+
+    <div class="container-fluid" style="margin-top:10px; background-color:aliceblue;position:relative;">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-8">
+                <a asp-action="Create" class="btn btn-primary mb-3 p-3 fa fa-plus-square" asp-route-returnUrl="@ViewBag.returnUrl">&nbsp; Add New Township</a>
+            </div>
+            <div class="form-row col-4" style="width:170px; position:absolute;right:0; margin:0;">
+                <div>
+                    @*@Html.Editor("PageSize",(string)ViewBag.PageSize, new { htmlAttributes = new { @class = "txtPageSize", @type = "number" } })*@
+                    <input type="number" name="PageSize" value="@ViewBag.PageSize" class="txtPageSize" />
+                </div>
+                <div>
+                    <label class="form-control" style="border:none; background-color:aliceblue;">Rows</label>
+                </div>
+
+            </div>
+
+
+            <div class="container-fluid" style="min-height:400px;">
+                <table class="table table-light table-bordered table-hover bg-transparent" id="myTable" style="/*min-width:1107px;*/">
+                    <thead style="background-color:#70a6e4;">
+                        <tr class="text-center">
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Townships.FirstOrDefault().TownshipName)
+
+                                @if (ViewBag.sortParamView == "SortDec")
+                                {
+                                    <button name="sortParam" value="SortAsc" class="btnSort" id="btnSortDecName"><i class="fa fa-sort-up"></i></button>
+                                    @*<a asp-route-sortParam="SortAsc" class="btnSort" id="btnSortDecName"><i class="fa fa-sort-up"></i></a>*@
+
+                                }
+                                else
+                                {
+                                    <button name="sortParam" value="SortDec" class="btnSort" id="btnSortAscName"><i class="fa fa-sort-down"></i></button>
+                                    @*<a asp-route-sortParam="SortDec" class="btnSort" id="btnSortAscName"><i class="fa fa-sort-down"></i></a>*@
+
+                                }
+
+                            </th>
+
+
+                            <th style="width:41px; border:none;"></th>
+                            <th style="width:41px; border:none;"></th>
+                            <th style="width:41px; border:none;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model == null)
+                        {
+                            <tr>
+                                <td>No Model Data!</td>
+                            </tr>
+
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.Townships)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.TownshipName
+                                    </td>
+
+                                    <td class="text-center">
+                                       
+                                        <a asp-action="Update" class="btn btn-primary btnEdit" asp-route-id="@item.TownshipId"><i class="fa fa-edit fa-sm"></i></a>
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a asp-action="Delete" asp-route-id="@item.TownshipId" class="btn btn-danger btnDel"><i class="fa fa-trash-alt fa-sm"></i></a>
+
+                                    </td>
+                                    <td class="text-center">
+
+                                        <a asp-action="Detail" asp-route-id="@item.TownshipId" class="btn btn-secondary btnDel"><i class="fa fa-ellipsis-h fa-sm"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @*<input id="btnSearchHidden" name="btnSearch"/>*@
+
+
+            @*for pagenation*@
+
+            <div page-model="@Model.PagingInfo" page-action="Index"
+                 page-classes-enabled="true" page-class="btn border m-1"
+                 page-class-normal="btn btn-default active"
+                 page-class-selected="btn btn-primary active" page-last="fa fa-fast-forward"
+                 page-first="fa fa-fast-backward" page-prev="fa fa-backward" page-next="fa fa-forward"
+                 class="btn-group m-1 ml-2" disabled-page="dis_able"></div>
+
+        </div>
+    </div>
+    @*<button type="submit" hidden name="btnSearch" value="Search" id="btnSearchHidden"></button>*@
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $(".searchTextBox1").focus();
+            //$("#btnSearch").click(function () {
+            //    $("#btnSearchHidden").attr("value", "Search");
+            //});
+
+        var abc = "@ViewBag.selectStateId";
+        if (abc != "StateId") {
+            $("#stateId").val(0).select();
+        }
+
+        //for textbox focus select all text in textbox
+        $("input[type='text']").on("click", function () {
+            $(this).select();
+        });
+        //for being active soft button
+        var bb = "@ViewBag.sortParamView";
+        if (bb == "SortDec") {
+            $("#btnSortDecName").addClass("btnSortActive");
+        }
+        else {
+            $("#btnSortAscName").addClass("btnSortActive");
+        }
+
+
+        //for table row clicked color changing
+            $('#myTable tbody tr').click(function () {
+                $(this).toggleClass('rowClickColor');/*.siblings().removeClass('bg-success');*/
+                $(this).siblings().removeClass('rowClickColor');
+            });
+
+        $("#CountryId").change(function () {           
+            $("#stateId").val("0").select();
+            $("form").submit();
+
+        });
+
+        $("#stateId").change(function () {
+            //$("form").submit();
+            $(".searchTextBox1").focus();
+        });
+
+        $(".searchTextBox1").keypress(function (event) {
+
+            if (event.keyCode == 13) {
+                $("#btnSearch").focus();
+                event.preventDefault();
+                return false;
+
+                //return event.key != "Enter";
+            }
+        });
+        });
+    </script>
+
+}

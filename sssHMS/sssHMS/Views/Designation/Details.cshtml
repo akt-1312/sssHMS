@@ -1,0 +1,26 @@
+﻿@model sssHMS.Models.Designation
+@{
+    ViewData["Title"] = "Details";
+    var title = "Designation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@title Details</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden asp-for="DesignationID" />
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <div class="form-group col-md-5">
+        <label asp-for="DesignationName" class="control-label"></label>
+        <input asp-for="DesignationName" class="form-control" readonly />
+
+    </div>
+    <div class="form-group col-md-3">
+        @*<input type="submit" class="btn btn-secondary" value="Go Back" />*@
+        <a href="@ViewBag.returnUrl" class="btn btn-secondary">Go Back</a>
+    </div>
+</form>
+
+
+

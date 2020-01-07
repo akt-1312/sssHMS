@@ -1,0 +1,394 @@
+﻿@model sssHMS.Models.DoctorSchedule
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{ 
+    
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%;
+            /*border-collapse:collapse;*/
+        }
+
+        td,th {
+            overflow: hidden;
+            /*white-space: nowrap;*/
+            word-wrap:break-word;
+        }
+
+        .table td {
+            padding: 0px;
+            vertical-align: middle;
+        }
+        tbody {
+            font-size: 14px;
+        }
+        .btnDel {
+            background-color: #bcd1e8;
+            border: #bcd1e4;
+        }
+
+            .btnDel:focus {
+                box-shadow: none;
+                outline: none;
+            }
+    </style>
+    
+}
+
+<h1>Create Doctor Schedules</h1>
+
+<form name="form1" method="post" asp-controller="DoctorSchedule" asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    @*<input id="retrunUrlID" name="returnUrl" value="@ViewBag.returnUrl" />*@
+
+    <div class="row selectRow">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input id="returnUrlID" hidden name="returnUrl" value="@ViewBag.returnUrl" />
+        <div hidden class="form-group col-md-3">
+            <label asp-for="DoctorID" class="control-label"></label>
+            <select id="DoctorID" asp-for="DoctorID"
+                    asp-items="@ViewBag.DoctorsID"
+                    class="form-control"></select>
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            @*<span class="text-danger" asp-validation-for="DoctorID"></span>*@
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="DoctorName" class="control-label"></label>
+            <select id="DoctorName" asp-for="DoctorName"
+                    asp-items="@ViewBag.Doctors"
+                    class="form-control"></select>
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            @*<span class="text-danger" asp-validation-for="DoctorName"></span>*@
+        </div>
+        <input hidden id="DepartmentID" value="@ViewBag.DeptID" asp-for="DepartmentID" />
+        <div class="form-group col-md-3">
+            <label asp-for="DepartmentName" class="control-label"></label>
+            <input readonly id="DepartmentName" value="@ViewBag.DeptName" asp-for="DepartmentName" class="form-control" />
+            <span asp-validation-for="DepartmentName" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">Units</label>
+            <select asp-for="UnitID" id="UnitID"
+                    asp-items="@ViewBag.Units" class="form-control"
+                    disabled="@(ViewBag.StateEnabled == false ? "disabled" : null)"></select>
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            <span asp-validation-for="UnitID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row" style="position:relative;">
+        <div class="form-group col-md-3">
+            <label asp-for="WeekDay" class="control-label"></label>
+            <select id="WeekDay" asp-for="WeekDay"
+                    asp-items="@ViewBag.WeekDays"
+                    class="form-control"></select>
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            @*<span class="text-danger" asp-validation-for="DoctorID"></span>*@
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="StartTime" class="control-label"></label>
+            <input type="text" id="timepickerStart" asp-for="StartTime" class="form-control" />
+            <span asp-validation-for="StartTime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label asp-for="EndTime" class="control-label"></label>
+            <input type="text" id="timepickerEnd" asp-for="EndTime" class="form-control" />
+            <span asp-validation-for="EndTime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="PerPatientTime" class="control-label"></label>
+            <select id="PerPatientTime" asp-for="PerPatientTime"
+                    asp-items="@ViewBag.PerPatientTimes"
+                    class="form-control"></select>
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            @*<span class="text-danger" asp-validation-for="DoctorName"></span>*@
+        </div>
+
+        <div class="form-group col-1" style="position:absolute; bottom:0; right:0;">
+            @*<label class="control-label"></label>*@
+            <button type="button" name="name" value="Add" id="btnAdd" class="btn btn-success" style="">Add</button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="container-fluid" style="min-height:400px;">
+            <table class="table table-light table-bordered table-hover bg-transparent" id="myTable" style="/*min-width:1107px;*/">
+                <thead style="background-color:#70a6e4;">
+                    <tr class="text-center">
+                        <th>
+                            @Html.DisplayNameFor(model => model.DoctorName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DepartmentName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UnitName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WeekDay)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EndTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PerPatientTime)
+                        </th>
+                        <th style="width:37px; border:none;">
+
+                        </th>
+
+                    </tr>
+                </thead>
+                @*<tbody>
+                        <tr>
+                            <td>
+                                @Html.EditorFor(a => a.DepartmentName, new { htmlAttributes = new { @class = "form-control" } });
+                            </td>
+                            <td>
+                                @Html.EditorFor(a => a.WeekDay, new { htmlAttributes = new { @class = "form-control" } });
+                            </td>
+                            <td>
+                                @Html.EditorFor(a => a.StartTime, new { htmlAttributes = new { @class = "form-control" } });
+                            </td>
+                            <td>
+                                @Html.EditorFor(a => a.EndTime, new { htmlAttributes = new { @class = "form-control" } });
+                            </td>
+                            <td>
+                                @Html.EditorFor(a => a.PerPatientTime, new { htmlAttributes = new { @class = "form-control" } });
+                            </td>
+                        </tr>
+                    </tbody>*@
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-5">
+            @*<button type="button" onclick="getAllData();" id="btnSave" class="btn btn-success">Save</button>*@
+            <button type="button" id="btnSave" value="Save All" class="btn btn-success">Save</button>
+            <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+        </div>
+    </div>
+    @*<input type="text" id="txtTest" name="testString" />
+    <button type="button" id="btnTest" name="test" value="test">Test</button>*@
+    @*<button type='button' onclick='RemDel();' value='Remove' id='btnDelTest' class='btn btn-default'><i class='fa fa-trash-alt'></i></button>*@
+
+</form>
+
+@section Scripts{
+    <script>
+
+        function productDelete(ctl) {
+            $(ctl).parents("tr").remove();
+        };
+
+
+        $(document).ready(function () {
+            $("#btnTest").click(function () {
+                alert("Ok");
+            });
+
+            $("#btnAdd").click(function () {
+                var y = $("#DoctorName :selected").text();
+                var x = $("#DoctorName").val();
+                if (x == "") {
+                    y = "";
+                }
+
+                //type='submit' " + "onclick='productDelete(this);' " + "class='btn btn-default'
+                var tdDel = '<td id="tdDel">' + "<button type='button'" + "onclick='productDelete(this);'" + "value='Remove'" + "id='btnDel'" + "class='btn btn-danger btnDel'>" + "<i class='fa fa-trash-alt fa-sm'>" + "</i>" + "</button>" + "</td>";
+                //var tdDel = "<td><input type='button' value='Remove' id='btnDel' onclick='productDelete(this);'/></td>"
+                var td1 = '<td id="doctorName">' + y + '</td>';
+                var td2 = '<td id="departmentName">' + $("#DepartmentName").val() + '</td>';
+                var td3 = '<td id="unitName">' + $("#UnitID :selected").text() + '</td>';
+                var td4 = '<td id="weekOfDay">' + $("#WeekDay").val() + '</td>';
+                var td5 = '<td id="startTime">' + $("#timepickerStart").val() + '</td>';
+                var td6 = '<td id="endTime">' + $("#timepickerEnd").val() + '</td>';
+                var td7 = '<td id="perPatient">' + $("#PerPatientTime").val() + '</td>';
+                var td8 = '<td hidden id="doctorId">' + $("#DoctorName").val() + '</td>';
+                var td9 = '<td hidden id="departmentId">' + $("#DepartmentID").val() + '</td>';
+                var td10 = '<td hidden id="unitId">' + $("#UnitID").val() + '</td>';
+
+                if (y == "" || $("#WeekDay").val() == "" || $("#DepartmentName").val() == "" || $("#UnitID :selected").text() == "" || $("#timepickerStart").val() == "" || $("#timepickerEnd").val() == "" || $("#PerPatientTime").val() == "") {
+                    alert("Fill Data Correctly!");
+                }
+                else {
+                    if ($("#myTable tbody").length == 0) {
+                        $("#myTable").append("<tbody id='tbodyID'></tbody>");
+                    }
+
+                    $("tbody").append('<tr>' + td1 + td2 + td3 + td4 + td5 + td6 + td7 + td8 + td9 + td10 +/*td11+*/tdDel + '</tr>');
+                }
+
+            });
+
+            $("#DoctorName").change(function () {
+                var returnUrl = $("#retrunUrlID").val();
+                //alert(returnUrl);
+                var select = $("#DoctorName option:selected").val();
+                //alert(select);
+                $.ajax({
+                    type: "GET",
+                    url: "/DoctorSchedule/GetDeptUnit",
+                    //contentType: "application/json; charset=utf-8",
+                    contentType: "html",
+                    //dataType: "json",
+                    data: {
+                        'DoctorName': select,
+                        'returnUrl': returnUrl,
+                    },
+                    error: function (response) {
+                        //alert("Error");
+                    },
+                    success: function (response) {
+
+                        var tbl = $("#myTable").html();
+                        //alert(tbl);
+                        $("body").html(response);
+                        $("table#myTable").html(tbl);
+
+                        //alert("Ok");
+                        //$("form").prop("action", "/DoctorSchedule/GetDeptUnit");
+                        //$("form").submit();
+                        //$("body").html(data);
+
+                        //document.location = "/DoctorSchedule/GetDeptUnit";
+                    }
+                });
+
+            });
+
+
+            $("form").on("click", "#btnSave", function () {
+                var returnUrl1 = $("#retrunUrlID").val();
+                //Loop through the Table rows and build a JSON array.
+                var customers = new Array();
+                $("#myTable TBODY TR").each(function () {
+                    var row = $(this);
+                    var customer = {};
+                    customer.DoctorID = row.find("TD").eq(7).html();
+                    customer.DoctorName = row.find("TD").eq(0).html();
+                    customer.DepartmentID = row.find("TD").eq(8).html();
+                    customer.DepartmentName = row.find("TD").eq(1).html();
+                    customer.UnitID = row.find("TD").eq(9).html();
+                    customer.UnitName = row.find("TD").eq(2).html();
+                    customer.WeekDay = row.find("TD").eq(3).html();
+                    customer.StartTime = row.find("TD").eq(4).html();
+                    customer.EndTime = row.find("TD").eq(5).html();
+                    customer.PerPatientTime = row.find("TD").eq(6).html();                    
+                    customers.push(customer);
+
+                    //alert(customer.returnUrl);
+                });
+                //console.log(customers);
+                //alert(customers);
+                //Send the JSON array to Controller using AJAX.
+                var doctorSchedules = JSON.stringify(customers);
+                //var returnUrl = JSON.stringify(returnUrl1);
+                //var all = doctorSchedules + urlData;
+                //alert(all);
+                $.ajax({
+                    type: "GET",
+                    url: "/DoctorSchedule/CreatePost",
+                    //contentType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: /*doctorSchedules,*/
+                    {
+                        'doctorSchedules': doctorSchedules,
+                        'returnUrl': returnUrl1
+                    },
+                    success: function (r) {
+                        
+                        if (r.isRedirect) {
+                            alert(r.records + " record(s) inserted.");
+                            //window.location.href = r.redirectUrl;
+                            window.location.href = r.backToUrl;
+
+                        }
+                        else {
+                            alert(r);
+                        }
+                        //$("form").submit();
+                        //},
+                    //error: function (b) {
+                    //    alert(b);
+                    }
+                });
+                //alert(JSON.stringify(customers));
+                //alert({ dsData, "returnUrl": urlData });
+                //console.log({
+                //    "doctorSchedules": doctorSchedules,
+                //    "returnUrl": returnUrl1
+                //});
+            });
+
+
+
+
+
+
+
+
+
+
+            //$("#DoctorID").change(function () {
+
+            //    //$.ajax({
+            //    //    url: "/DoctorSchedule/GetDoctorName",
+            //    //    type: "GET",
+            //    //    error: function (response) {
+            //    //        alert(response);
+            //    //    },
+            //    //    success: function (response) {
+            //    //        alert(response);
+            //    //    }
+            //    //});
+
+            //    $("form").prop("action", "/DoctorSchedule/GetDoctorName");
+            //    $("form").submit();
+
+            //});
+
+
+
+
+
+            $("#TownshipName").focus();
+
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
+            //$("#TownshipName").keypress(function (event) {
+            //    if (event.keyCode == 13) {
+            //        $("#btnSave").focus();
+            //    }
+            //});
+
+            $('#timepickerStart').mdtimepicker();
+            $('#timepickerStart').mdtimepicker().on('timechanged', function (e) {
+                console.log(e.value);
+                console.log(e.time);
+            });
+
+            $('#timepickerEnd').mdtimepicker();
+            $('#timepickerEnd').mdtimepicker().on('timechanged', function (e) {
+                console.log(e.value);
+                console.log(e.time);
+            });
+        });
+
+    </script>
+
+
+}

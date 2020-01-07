@@ -1,0 +1,132 @@
+﻿@model sssHMS.Models.DoctorSchedule
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update Doctor Schedule</h1>
+
+<form method="post" asp-controller="DoctorSchedule" asp-action="Update">
+    <div asp-validation-summary="ModelOnly"></div>
+
+
+    <div asp-validation-summary="ModelOnly"></div>
+    <input id="returnUrlID" hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <input hidden asp-for="DoctorScheduleId" />
+
+    <div class="form-group col-md-5">
+        <label asp-for="DoctorName" class="control-label"></label>
+        <input id="DoctorName" asp-for="DoctorName" class="form-control" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span class="text-danger" asp-validation-for="DoctorName"></span>
+    </div>
+    @*<input hidden id="DepartmentID" value="@ViewBag.DeptID" asp-for="DepartmentID" />*@
+    <div class="form-group col-md-5">
+        <label asp-for="DepartmentName" class="control-label"></label>
+        <input id="DepartmentName" asp-for="DepartmentName" class="form-control" />
+        <span asp-validation-for="DepartmentName" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="UnitName" class="control-label"></label>
+        <input asp-for="UnitName" class="form-control" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="UnitID" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="WeekDay" class="control-label"></label>
+        <select asp-for="WeekDay" asp-items="ViewBag.WeekDays" class="form-control"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="WeekDay" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="StartTime" class="control-label"></label>
+        <input type="text" id="timepickerStart" asp-for="StartTime" class="form-control" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="EndTime" class="control-label"></label>
+        <input type="text" id="timepickerEnd" asp-for="EndTime" class="form-control" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="PerPatientTime" class="control-label"></label>
+        <select asp-for="PerPatientTime" asp-items="ViewBag.PerPatientTimes" class="form-control"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="PerPatientTime" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group col-md-5">
+        <button type="button" id="btnSave" class="btn btn-success">Save</button>
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+    </div>
+
+
+</form>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $("#DoctorName").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input/*[type='text']*/").on("click", function () {
+                $(this).select();
+            });
+            $('input,select').on("keypress", function (e) {
+                /* ENTER PRESSED*/
+                if (e.keyCode == 13 /*|| e.keyCode == 40*/) {
+                    /* FOCUS ELEMENT */
+                    var inputs = $(this).parents("form").eq(0).find(":input");
+                    var idx = inputs.index(this);
+
+                    if (idx == inputs.length - 1) {
+                        inputs[0].select()
+                    } else {
+                        $("#txtArea").on("keypress", function (e) {
+                            $("#txtPh1").focus();
+                        });
+                        inputs[idx + 1].focus(); //  handles submit buttons
+                        //inputs[idx + 1].select();
+                    }
+                    return false;
+                }
+            });
+            $('input, select').keydown(function (e) {
+                if (e.keyCode == 40) {
+                    //$(this).next('input, select').focus();
+                    var inputs = $(this).parents("form").eq(0).find(":input");
+                    var idx = inputs.index(this);
+
+                    if (idx == inputs.length - 1) {
+                        inputs[0].select()
+                    } else {
+                        $("#txtArea").on("keypress", function (e) {
+                            $("#txtPh1").focus();
+                        });
+                        inputs[idx + 1].focus(); //  handles submit buttons
+                        //inputs[idx + 1].select();
+                    }
+                    return false;
+                }
+            });
+
+
+            $('#timepickerStart').mdtimepicker();
+            $('#timepickerStart').mdtimepicker().on('timechanged', function (e) {
+                console.log(e.value);
+                console.log(e.time);
+            });
+
+            $('#timepickerEnd').mdtimepicker();
+            $('#timepickerEnd').mdtimepicker().on('timechanged', function (e) {
+                console.log(e.value);
+                console.log(e.time);
+
+            });
+        });
+    </script>
+}

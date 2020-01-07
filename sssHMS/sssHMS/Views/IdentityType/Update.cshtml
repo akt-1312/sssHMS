@@ -1,0 +1,46 @@
+﻿@model sssHMS.Models.IdentityType
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Service Update</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <input hidden asp-for="IdentityTypeID" />
+
+    <div class="form-group col-md-5">
+        <label asp-for="IdentityTypeName" class="control-label"></label>
+        <input id="CountryName" asp-for="IdentityTypeName" autocomplete="off" class="form-control" />
+        <span asp-validation-for="IdentityTypeName" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group col-md-5">
+        <button type="button" id="btnSave" class="btn btn-success">Save</button>
+
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#CountryName").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
+            $("#CountryName").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSave").focus();
+                }
+            });
+        });
+    </script>
+}

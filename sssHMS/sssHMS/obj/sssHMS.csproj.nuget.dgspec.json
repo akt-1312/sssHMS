@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\softsoftwaresystem1\\source\\repos\\sssHMS\\sssHMS\\sssHMS.csproj": {}
+    "C:\\Users\\softsoftwaresystem1\\Desktop\\HMS\\trunk\\sssHMS\\sssHMS\\sssHMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\softsoftwaresystem1\\source\\repos\\sssHMS\\sssHMS\\sssHMS.csproj": {
+    "C:\\Users\\softsoftwaresystem1\\Desktop\\HMS\\trunk\\sssHMS\\sssHMS\\sssHMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\softsoftwaresystem1\\source\\repos\\sssHMS\\sssHMS\\sssHMS.csproj",
+        "projectUniqueName": "C:\\Users\\softsoftwaresystem1\\Desktop\\HMS\\trunk\\sssHMS\\sssHMS\\sssHMS.csproj",
         "projectName": "sssHMS",
-        "projectPath": "C:\\Users\\softsoftwaresystem1\\source\\repos\\sssHMS\\sssHMS\\sssHMS.csproj",
+        "projectPath": "C:\\Users\\softsoftwaresystem1\\Desktop\\HMS\\trunk\\sssHMS\\sssHMS\\sssHMS.csproj",
         "packagesPath": "C:\\Users\\softsoftwaresystem1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\softsoftwaresystem1\\source\\repos\\sssHMS\\sssHMS\\obj\\",
+        "outputPath": "C:\\Users\\softsoftwaresystem1\\Desktop\\HMS\\trunk\\sssHMS\\sssHMS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

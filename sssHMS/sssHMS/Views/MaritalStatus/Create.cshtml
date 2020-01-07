@@ -1,0 +1,58 @@
+﻿@model sssHMS.Models.MaritalStatus
+@{
+    ViewData["Title"] = "Create";
+    var title = "MaritalStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@title Create</h1>
+
+<form method="post" id="test">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="MaritalStatusName" class="control-label"></label>
+            <input asp-for="MaritalStatusName" class="form-control" autofocus="autofocus" onclick="Save()" />
+            <span asp-validation-for="MaritalStatusName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-5">
+            <button type="button" class="btn btn-success" id="button" onclick="Save()" >Save</button>
+            <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+   
+    <script type="text/javascript">
+    
+    $(document).ready(function () {
+        var i=0;
+        alert(i);
+        $('input:text').keyup(function (e) {
+            //alert('i');
+            if (e.keyCode == 13) {
+                i = i + 1;
+                alert("foucs" + i);
+                if (i == 1) {
+                    $('#button').focus();
+                }
+                //alert("submit" + i);
+                if (i == 2) {
+                    
+                }
+            } 
+           
+        });
+        $('#button').click(function () {
+            $('#test').submit();
+        })
+        })
+    </script>
+
+}
+
+

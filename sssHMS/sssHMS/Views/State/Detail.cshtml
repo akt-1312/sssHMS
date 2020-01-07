@@ -1,0 +1,33 @@
+﻿@model sssHMS.Models.State
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>State Details</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden asp-for="StateId" />
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+
+
+    <div class="form-group col-md-5">
+        <label class="control-label"></label>
+        <select asp-for="CountryId" disabled class="form-control" asp-items="@ViewBag.Countries"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="StateName" class="control-label"></label>
+        <input asp-for="StateName" class="form-control" disabled />
+        <span asp-validation-for="StateName" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group col-md-3">
+        <a href="@ViewBag.returnUrl" class="btn btn-secondary">Go Back</a>
+    </div>
+
+
+</form>
+

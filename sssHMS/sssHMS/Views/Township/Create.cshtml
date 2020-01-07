@@ -1,0 +1,83 @@
+﻿@model sssHMS.Models.Township
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Township Create</h1>
+<form name="form1" method="post" asp-controller="Township" asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+
+
+    <div class="form-group col-md-5">
+        <label asp-for="State.Country" class="control-label"></label>
+        <select name="CountryId" id="CountryId" asp-for="State.CountryId"
+        asp-items="@ViewBag.Countries"
+        onchange="DoPostBack();" class="form-control"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span class="text-danger" asp-validation-for="State.CountryId"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label class="control-label">State</label>
+        <select asp-for="StateId"
+        asp-items="@ViewBag.States" class="form-control"
+        disabled="@(ViewBag.StateEnabled == false ? "disabled" : null)"></select>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <span asp-validation-for="StateId" class="text-danger"></span>
+    </div>
+   
+    <div class="form-group col-md-5">
+        <label asp-for="TownshipName" class="control-label"></label>
+        <input name="townshipName" id="TownshipName" asp-for="TownshipName" class="form-control" />
+        <span asp-validation-for="TownshipName" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group col-md-5">
+        <button type="button" id="btnSave" class="btn btn-success">Save</button>
+
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To Main</a>
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>
+    //var a = $("select").val();
+    //alert(a);
+
+    //    $("select").change(function () {
+    //        var b = $(this).val();
+    //        alert(b);
+    //    });
+
+            function DoPostBack() {
+                var select = document.getElementById("CountryId");
+                var option = select.options[select.selectedIndex];
+                if (option.value != "Select Country") {
+                    document.form1.action = "/Township/GetStates";
+                    document.form1.submit();
+                }
+            }
+
+    $(document).ready(function () {
+        $("#TownshipName").focus();
+            $("#btnSave").click(function () {
+                $("form").submit();
+            });
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
+            $("#TownshipName").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSave").focus();
+                }
+            });
+    });
+
+    </script>
+
+
+}

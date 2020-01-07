@@ -1,0 +1,28 @@
+﻿@model sssHMS.Models.Service
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Service Detail</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
+    <input hidden asp-for="ServiceID" />
+
+    <div class="form-group col-md-5">
+        <label asp-for="ServiceName" class="control-label"></label>
+        <input disabled id="CountryName" asp-for="ServiceName" autocomplete="off" class="form-control" />
+        
+    </div>
+
+
+    <div class="form-group col-md-5">
+        @*<button type="button" id="btnSave" class="btn btn-success">Save</button>*@
+
+        <a class="btn btn-secondary" href="@ViewBag.returnUrl">Back To Main</a>
+    </div>
+
+
+</form>
+

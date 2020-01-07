@@ -1,0 +1,257 @@
+﻿@model sssHMS.Models.ViewModels.DoctorViewModel
+@{
+    ViewData["Title"] = "Delete";
+    var title = "Doctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #namewidth {
+        margin-left: 47px;
+        width: 118%;
+    }
+
+    #top {
+        margin-top: 20px;
+    }
+</style>
+<h1>@title Delete</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <input type="hidden" asp-for="DoctorID" name="returnUrl" value="@ViewBag.returnUrl" />
+
+
+    <div class="row" id="top">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-1">
+                    <label asp-for="FirstName"></label>
+                </div>
+
+                <div class="col-3" id="namewidth">
+                    <input asp-for="FirstName" class="form-control" style="width:120%" autofocus="autofocus" disabled="disabled"/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-1" style="margin-left:20px;">
+                    <label asp-for="LastName" class="control-label"></label>
+                </div>
+                <div class="col-3" id="namewidth">
+                    <input asp-for="LastName" class="form-control" style="width:120%" disabled="disabled"/>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row" id="top">
+                <div class="col-1">
+                    <label>PhoneNo</label>
+                </div>
+                <div class="col-3" id="namewidth">
+                    <input asp-for="PhoneNumber1" class="form-control" style="width:120%" disabled="disabled"/>
+                    <span asp-validation-for="PhoneNumber1" class="text-danger"></span>
+                </div>
+                <div class="col-1" style="margin-left:20px;">
+                    <label>Other</label>
+                </div>
+                <div class="col-3" id="namewidth">
+                    <input asp-for="PhoneNumber2" class="form-control" style="width:120%" disabled="disabled" />
+                </div>
+            </div>
+
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-2">
+            <img src="@Model.Image" style="width:130px; height:70px;" /><br />
+            <input type="file" disabled="disabled" />
+        </div>
+        <div class="col-2">
+            <input type="radio" value="Female" name="GenderID" @(ViewBag.Gender == "Female" ? "checked='true'" : "") disabled="disabled" />Female
+            <input type="radio" value="Male" name="GenderID" @(ViewBag.Gender == "Male" ? "checked='true'" : "") disabled="disabled"/>Male
+        </div>
+
+    </div>
+
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Email" class="control-label"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Email" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-1">
+            <label asp-for="DOB" class="control-label"></label>
+        </div>
+        <div class="col-3">
+            <input asp-for="DOB" class="form-control" type="date" disabled="disabled"/>
+        </div>
+    </div>
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Designation" class="control-label"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="DesignationID" class="form-control" asp-items="@(new SelectList(@ViewBag.DegList,"DesignationID","DesignationName"))" disabled="disabled"></select>
+
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-1">
+            <label asp-for="Blood"></label>
+        </div>
+        <div class="col-3">
+            <select asp-for="BloodID" class="form-control" asp-items="@(new SelectList(@ViewBag.BloodList,"BloodID","BloodType"))" disabled="disabled"></select>
+        </div>
+    </div>
+
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Department" class="control-label"></label>
+        </div>
+        <div class="col-2">
+            <select asp-for="DepartmentID" class="form-control" asp-items="@(new SelectList(@ViewBag.DepartmentList,"DepartmentID","DepartmentName"))" disabled="disabled"></select>
+        </div>
+        <div class="col-1">
+            @*<label asp-for="Unit" class="control-label"></label>*@
+        </div>
+        <div class="col-2">
+
+
+            @{
+                for (int i = 0; i < Model.UnitList.Count; i++)
+                {
+                    if (Model.UnitList[i].IsChecked == false)
+                    {
+                        <input type="checkbox" asp-for="UnitList[i].IsChecked" disabled="disabled" />
+                        <label asp-for="UnitList[i].Unitid">@Model.UnitList[i].Unitname</label><br />
+                        <input type="hidden" asp-for="UnitList[i].Unitname" />
+                        <input type="hidden" asp-for="UnitList[i].Unitid" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" asp-for="UnitList[i].IsChecked" checked disabled="disabled"/>
+                        <label asp-for="UnitList[i].Unitid">@Model.UnitList[i].Unitname</label><br />
+                        <input type="hidden" asp-for="UnitList[i].Unitname" />
+                        <input type="hidden" asp-for="UnitList[i].Unitid" />
+                    }
+
+                }
+            }
+
+
+        </div>
+    </div>
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Address" class="control-label"></label>
+        </div>
+        <div class="col-5">
+            <textarea asp-for="Address" class="form-control" disabled="disabled"></textarea>
+        </div>
+    </div>
+
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Degree" class="control-label"></label>
+        </div>
+        <div class="col-5">
+            <textarea asp-for="Degree" class="form-control" disabled="disabled"></textarea>
+        </div>
+    </div>
+
+    <div class="row" id="top">
+        <div class="col-1">
+            <label asp-for="Status" class="control-label"></label>
+        </div>
+        <div class="col-2">
+            <select asp-for="StatusID" class="form-control" asp-items="@(new SelectList(@ViewBag.StatusList,"StatusID","StatusName"))" disabled="disabled"></select>
+        </div>
+        <div class="col-4">
+
+        </div>
+        <div class="col-1">
+            <label asp-for="JobStart" class="control-label"></label>
+        </div>
+        <div class="col-2">
+            <input asp-for="JobStart" type="date" class="form-control" id="jobstart" disabled="disabled"/>
+        </div>
+    </div>
+    <div class="row" id="top">
+        <div class="col-7">
+
+        </div>
+        <div class="col-1">
+            <label asp-for="JobEnd" class="control-label"></label>
+        </div>
+        <div class="col-2">
+            <input asp-for="JobEnd" type="date" class="form-control" id="jobend" disabled="disabled" />
+        </div>
+
+    </div>
+    <div class="row" id="top">
+        <div class="col-7">
+
+        </div>
+        <div class="col-1">
+            <label>Why Leave</label>
+        </div>
+        <div class="col-3">
+            <textarea asp-for="DescriptionforLeave" class="form-control" id="whyleave" disabled="disabled"></textarea>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-group col-md-3">
+        <button type="submit" class="btn btn-success">Delete</button>
+        @*<input type="submit" class="btn btn-success" value="Update" />*@
+        @*<a class="btn btn-primary" onClick="history.go(-1); return false;">Back To List</a>*@
+        <a class="btn btn-primary" href="@ViewBag.returnUrl">Back To List</a>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#docdelete').prop('disabled', true);
+
+            $('#selectID').on('change', function () {
+                //alert('ok');
+                var id = $(this).val();
+                alert(id);
+                //alert(id);
+                if (id == 0) {
+                    $('#jobend').prop('disabled', true);
+                    $('#whyleave').prop('disabled', true);
+                    $('#jobstart').prop('disabled', true);
+                }
+                if (id == 1) {
+                    //alert('ok');
+                    $('#jobend').prop('disabled', true);
+                    $('#whyleave').prop('disabled', true);
+                    $('#jobstart').prop('disabled', false);
+
+                }
+                if (id == 2) {
+                    $('#jobstart').prop('disabled', true);
+                    $('#jobend').prop('disabled', false);
+                    $('#whyleave').prop('disabled', false);
+
+                }
+            });
+
+
+
+        })
+    </script>
+}
+
+
