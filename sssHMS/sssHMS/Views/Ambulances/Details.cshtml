@@ -1,0 +1,31 @@
+﻿@model Hospital.Models.Ambulance
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ambulance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amb_num)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amb_num)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Amb_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

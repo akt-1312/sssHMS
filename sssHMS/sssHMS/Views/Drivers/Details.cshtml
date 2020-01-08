@@ -1,0 +1,49 @@
+﻿@model Hospital.Models.Driver
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Driver</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dr_name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dr_name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MOB)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOB)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Shift)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Dr_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,49 @@
+﻿@model Hospital.Models.Medicine
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mdcn_name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mdcn_name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.company)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.m_date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.m_date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.e_date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.e_date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Mdcn_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

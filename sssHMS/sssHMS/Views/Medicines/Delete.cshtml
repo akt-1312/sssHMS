@@ -1,0 +1,52 @@
+﻿@model Hospital.Models.Medicine
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mdcn_name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mdcn_name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.company)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.m_date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.m_date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.e_date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.e_date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Mdcn_id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
