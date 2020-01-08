@@ -270,7 +270,8 @@
 
 
             $("form").on("click", "#btnSave", function () {
-                var returnUrl1 = $("#retrunUrlID").val();
+                var returnUrl1 = $("#returnUrlID").val();
+                
                 //Loop through the Table rows and build a JSON array.
                 var customers = new Array();
                 $("#myTable TBODY TR").each(function () {
