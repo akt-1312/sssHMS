@@ -6,48 +6,48 @@ using System.Threading.Tasks;
 
 namespace sssHMS.Models
 {
-    public class HospitalInfo
+    public class sssHMSInfo
     {
         [Key]
-        public int HospitalId { get; set; }
+        public int sssHMSId { get; set; }
 
         [Required]
-        [Display(Name ="Hospital Name")]
-        public string HospitalName { get; set; }
+        [Display(Name ="sssHMS Name")]
+        public string sssHMSName { get; set; }
 
         [Required]
         [Display(Name = "CODE")]
-        public string HospitalCode { get; set; }
+        public string sssHMSCode { get; set; }
 
         [Required]
         [Display(Name = "Address")]
-        public string HospitalAddress { get; set; }
+        public string sssHMSAddress { get; set; }
 
         [Phone]
         [Display(Name = "Phone")]
-        public string HospitalPhoneNo1 { get; set; }
+        public string sssHMSPhoneNo1 { get; set; }
 
         [Phone]
         [Display(Name = "Phone")]
-        public string HospitalPhoneNo2 { get; set; }
+        public string sssHMSPhoneNo2 { get; set; }
 
         [Phone]
         [Display(Name = "Phone")]
-        public string HospitalPhoneNo3 { get; set; }
+        public string sssHMSPhoneNo3 { get; set; }
 
         [Phone]
         [Display(Name = "Phone")]
-        public string HospitalPhoneNo4 { get; set; }
+        public string sssHMSPhoneNo4 { get; set; }
 
         [EmailAddress]
         [Display(Name = "Email")]
-        public string HospitalEmail { get; set; }
+        public string sssHMSEmail { get; set; }
 
         [Display(Name = "Website")]
-        public string HospitalWebsite { get; set; }
+        public string sssHMSWebsite { get; set; }
 
         [Display(Name = "Logo")]
-        public string HospitalImage { get; set; }
+        public string sssHMSImage { get; set; }
 
 
     }

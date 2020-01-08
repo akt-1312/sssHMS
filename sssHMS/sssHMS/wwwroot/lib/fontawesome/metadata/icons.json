@@ -897,7 +897,7 @@
         "emt",
         "er",
         "help",
-        "hospital",
+        "sssHMS",
         "support",
         "vehicle"
       ]
@@ -10098,7 +10098,7 @@
       "terms": [
         "doctor",
         "general practitioner",
-        "hospital",
+        "sssHMS",
         "infirmary",
         "medicine",
         "office",
@@ -24042,7 +24042,7 @@
       "terms": [
         "directions",
         "emergency",
-        "hospital",
+        "sssHMS",
         "hotel",
         "map"
       ]
@@ -26277,7 +26277,7 @@
       "solid"
     ]
   },
-  "hospital": {
+  "sssHMS": {
     "changes": [
       "3",
       "5.0.0"
@@ -26295,7 +26295,7 @@
       "regular"
     ],
     "unicode": "f0f8",
-    "label": "hospital",
+    "label": "sssHMS",
     "voted": false,
     "svg": {
       "solid": {
@@ -26330,7 +26330,7 @@
       "regular"
     ]
   },
-  "hospital-alt": {
+  "sssHMS-alt": {
     "changes": [
       "5.0.7"
     ],
@@ -26346,7 +26346,7 @@
       "solid"
     ],
     "unicode": "f47d",
-    "label": "Alternate Hospital",
+    "label": "Alternate sssHMS",
     "voted": false,
     "svg": {
       "solid": {
@@ -26367,7 +26367,7 @@
       "solid"
     ]
   },
-  "hospital-symbol": {
+  "sssHMS-symbol": {
     "changes": [
       "5.0.7"
     ],
@@ -26383,7 +26383,7 @@
       "solid"
     ],
     "unicode": "f47e",
-    "label": "Hospital Symbol",
+    "label": "sssHMS Symbol",
     "voted": false,
     "svg": {
       "solid": {
@@ -38081,7 +38081,7 @@
         "bed",
         "electrocardiogram",
         "health",
-        "hospital",
+        "sssHMS",
         "life",
         "patient",
         "vital"
@@ -45694,7 +45694,7 @@
         "diagnosis",
         "doctor",
         "general practitioner",
-        "hospital",
+        "sssHMS",
         "infirmary",
         "medicine",
         "office",

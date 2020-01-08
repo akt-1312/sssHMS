@@ -220,9 +220,9 @@ harvard-medical-school:
     - first-aid
     - heart
     - heartbeat
-    - hospital
-    - hospital-alt
-    - hospital-symbol
+    - sssHMS
+    - sssHMS-alt
+    - sssHMS-symbol
     - id-card-alt
     - notes-medical
     - pills

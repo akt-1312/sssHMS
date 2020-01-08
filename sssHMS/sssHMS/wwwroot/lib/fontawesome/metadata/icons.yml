@@ -325,7 +325,7 @@ ambulance:
       - emt
       - er
       - help
-      - hospital
+      - sssHMS
       - support
       - vehicle
   styles:
@@ -3802,7 +3802,7 @@ clinic-medical:
     terms:
       - doctor
       - general practitioner
-      - hospital
+      - sssHMS
       - infirmary
       - medicine
       - office
@@ -8899,7 +8899,7 @@ h-square:
     terms:
       - directions
       - emergency
-      - hospital
+      - sssHMS
       - hotel
       - map
   styles:
@@ -9698,11 +9698,11 @@ horse-head:
   styles:
     - solid
   unicode: f7ab
-hospital:
+sssHMS:
   changes:
     - '3'
     - 5.0.0
-  label: hospital
+  label: sssHMS
   search:
     terms:
       - building
@@ -9713,10 +9713,10 @@ hospital:
     - regular
   unicode: f0f8
   voted: false
-hospital-alt:
+sssHMS-alt:
   changes:
     - 5.0.7
-  label: Alternate Hospital
+  label: Alternate sssHMS
   search:
     terms:
       - building
@@ -9726,10 +9726,10 @@ hospital-alt:
     - solid
   unicode: f47d
   voted: false
-hospital-symbol:
+sssHMS-symbol:
   changes:
     - 5.0.7
-  label: Hospital Symbol
+  label: sssHMS Symbol
   search:
     terms:
       - clinic
@@ -14059,7 +14059,7 @@ procedures:
       - bed
       - electrocardiogram
       - health
-      - hospital
+      - sssHMS
       - life
       - patient
       - vital
@@ -16865,7 +16865,7 @@ stethoscope:
       - diagnosis
       - doctor
       - general practitioner
-      - hospital
+      - sssHMS
       - infirmary
       - medicine
       - office

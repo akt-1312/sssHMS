@@ -4,11 +4,15 @@ using System.Text;
 using sssHMS.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using sssHMS.Models;
 
 namespace sssHMS.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<Ambulance> Ambulances { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
         public DbSet<Blood> Bloods { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
@@ -29,7 +33,7 @@ namespace sssHMS.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Township> Townships { get; set; }
-        public DbSet<HospitalInfo> HospitalInfos { get; set; }
+        public DbSet<sssHMSInfo> sssHMSInfos { get; set; }
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServicePrice> ServicePrices { get; set; }

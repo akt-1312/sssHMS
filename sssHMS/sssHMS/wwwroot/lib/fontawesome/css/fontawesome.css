@@ -2118,13 +2118,13 @@ readers do not read off random characters that represent icons */
 .fa-horse-head:before {
   content: "\f7ab"; }
 
-.fa-hospital:before {
+.fa-sssHMS:before {
   content: "\f0f8"; }
 
-.fa-hospital-alt:before {
+.fa-sssHMS-alt:before {
   content: "\f47d"; }
 
-.fa-hospital-symbol:before {
+.fa-sssHMS-symbol:before {
   content: "\f47e"; }
 
 .fa-hot-tub:before {

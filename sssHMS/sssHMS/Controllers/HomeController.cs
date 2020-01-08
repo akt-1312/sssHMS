@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Hospital.Models;
+using sssHMS.Models;
 
-namespace Hospital.Controllers
+namespace sssHMS.Controllers
 {
     public class HomeController : Controller
     {

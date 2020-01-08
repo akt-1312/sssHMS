@@ -27,15 +27,15 @@ namespace sssHMS.Controllers
         }
 
         [BindProperty]
-        public HospitalInfo HospitalInfo { get; set; }
+        public sssHMSInfo sssHMSInfo { get; set; }
 
 
         public async Task<IActionResult> Index(string sortParam, int searchField, string searchParam, int studentPage = 1, int PageSize = 3)
         {
-            HospitalInfoViewModel HospitalInfoVM = new HospitalInfoViewModel()
+            sssHMSInfoViewModel sssHMSInfoVM = new sssHMSInfoViewModel()
             {
 
-                HospitalInfos = new List<Models.HospitalInfo>()
+                sssHMSInfos = new List<Models.sssHMSInfo>()
 
             };
             if (searchField != 0)
@@ -43,13 +43,13 @@ namespace sssHMS.Controllers
                 ViewBag.DropDownColor = "abc";
             }
 
-            FillHospitalIndex(searchField);
+            FillsssHMSIndex(searchField);
 
-            HospitalInfoVM.HospitalInfos = await db.HospitalInfos.ToListAsync();
+            sssHMSInfoVM.sssHMSInfos = await db.sssHMSInfos.ToListAsync();
 
             if (searchField != 0)
             {
-                HospitalInfoVM.HospitalInfos = db.HospitalInfos.Where(a => a.HospitalId == searchField).ToList();
+                sssHMSInfoVM.sssHMSInfos = db.sssHMSInfos.Where(a => a.sssHMSId == searchField).ToList();
             }
 
 
@@ -85,7 +85,7 @@ namespace sssHMS.Controllers
             }
 
 
-            var count = HospitalInfoVM.HospitalInfos.Count;
+            var count = sssHMSInfoVM.sssHMSInfos.Count;
             if (count == 0)
             {
                 studentPage = 0;
@@ -94,14 +94,14 @@ namespace sssHMS.Controllers
 
             if (sortParam == "SortDec")
             {
-                HospitalInfoVM.HospitalInfos = HospitalInfoVM.HospitalInfos.OrderByDescending(p => p.HospitalName)
+                sssHMSInfoVM.sssHMSInfos = sssHMSInfoVM.sssHMSInfos.OrderByDescending(p => p.sssHMSName)
                 .Skip((studentPage - 1) * PageSize)
                 .Take(PageSize).ToList();
                 ViewBag.sortParamView = "SortDec";
             }           
             else
             {
-                HospitalInfoVM.HospitalInfos = HospitalInfoVM.HospitalInfos.OrderBy(p => p.HospitalName)
+                sssHMSInfoVM.sssHMSInfos = sssHMSInfoVM.sssHMSInfos.OrderBy(p => p.sssHMSName)
                 .Skip((studentPage - 1) * PageSize)
                 .Take(PageSize).ToList();
                 ViewBag.sortParamView = "SortAsc";
@@ -116,7 +116,7 @@ namespace sssHMS.Controllers
 
 
 
-            HospitalInfoVM.PagingInfo = new PagingInfo()
+            sssHMSInfoVM.PagingInfo = new PagingInfo()
             {
                 CurrentPage = studentPage,
                 ItemsPerPage = PageSize,
@@ -131,18 +131,18 @@ namespace sssHMS.Controllers
             //    return View("Index");
             //}
 
-            return View(HospitalInfoVM);
+            return View(sssHMSInfoVM);
         }
 
-        public void FillHospitalIndex(int searchField)
+        public void FillsssHMSIndex(int searchField)
         {
-            List<SelectListItem> hospitals = new List<SelectListItem>();
-            hospitals.Insert(0, new SelectListItem() { Text = "Select Hospital", Value = "0" });
-            foreach (var obj in db.HospitalInfos)
+            List<SelectListItem> sssHMSs = new List<SelectListItem>();
+            sssHMSs.Insert(0, new SelectListItem() { Text = "Select sssHMS", Value = "0" });
+            foreach (var obj in db.sssHMSInfos)
             {
-                hospitals.Add(new SelectListItem() { Text = obj.HospitalName, Value = obj.HospitalId.ToString() });
+                sssHMSs.Add(new SelectListItem() { Text = obj.sssHMSName, Value = obj.sssHMSId.ToString() });
             }
-            SelectListItem selectedItem = (from i in hospitals
+            SelectListItem selectedItem = (from i in sssHMSs
                                            where i.Value == searchField.ToString()
                                            select i).SingleOrDefault();
             if (selectedItem != null)
@@ -150,7 +150,7 @@ namespace sssHMS.Controllers
                 selectedItem.Selected = true;
             }
 
-            ViewBag.Hospitals = hospitals;
+            ViewBag.sssHMSs = sssHMSs;
         }
 
 
@@ -168,30 +168,30 @@ namespace sssHMS.Controllers
             ViewBag.returnUrl = returnUrl;
             if(ModelState.IsValid)
             {
-                db.HospitalInfos.Add(HospitalInfo);
+                db.sssHMSInfos.Add(sssHMSInfo);
                 await db.SaveChangesAsync();
 
                 string webRootPath = hostingEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
 
-                var HospitalFromDb = db.HospitalInfos.Find(HospitalInfo.HospitalId);
+                var sssHMSFromDb = db.sssHMSInfos.Find(sssHMSInfo.sssHMSId);
 
                 if(files.Count!=0)
                 {
-                    var uploads = Path.Combine(webRootPath, SD.HospitalImageFolder);
+                    var uploads = Path.Combine(webRootPath, SD.sssHMSImageFolder);
                     var extension = Path.GetExtension(files[0].FileName);
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, HospitalInfo.HospitalId + extension), FileMode.Create))
+                    using (var filestream = new FileStream(Path.Combine(uploads, sssHMSInfo.sssHMSId + extension), FileMode.Create))
                     {
                         files[0].CopyTo(filestream);
                     }
-                    HospitalFromDb.HospitalImage = @"\" + SD.HospitalImageFolder + @"\" + HospitalInfo.HospitalId + extension;
+                    sssHMSFromDb.sssHMSImage = @"\" + SD.sssHMSImageFolder + @"\" + sssHMSInfo.sssHMSId + extension;
                 }
                 else
                 {
-                    var uploads = Path.Combine(webRootPath, SD.HospitalImageFolder + @"\" + SD.DefaultHospitalImage);
-                    System.IO.File.Copy(uploads, webRootPath + @"\" + SD.HospitalImageFolder + @"\" + HospitalInfo.HospitalId + ".jpg");
-                    HospitalFromDb.HospitalImage = @"\" + SD.HospitalImageFolder + @"\" + HospitalInfo.HospitalId + ".jpg";
+                    var uploads = Path.Combine(webRootPath, SD.sssHMSImageFolder + @"\" + SD.DefaultsssHMSImage);
+                    System.IO.File.Copy(uploads, webRootPath + @"\" + SD.sssHMSImageFolder + @"\" + sssHMSInfo.sssHMSId + ".jpg");
+                    sssHMSFromDb.sssHMSImage = @"\" + SD.sssHMSImageFolder + @"\" + sssHMSInfo.sssHMSId + ".jpg";
 
                 }
                 await db.SaveChangesAsync();
@@ -203,9 +203,9 @@ namespace sssHMS.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var updateHospitalInfo=await db.HospitalInfos.FindAsync(id);
+            var updatesssHMSInfo=await db.sssHMSInfos.FindAsync(id);
             ViewBag.returnUrl = Request.Headers["referer"].ToString();
-            return View(updateHospitalInfo);
+            return View(updatesssHMSInfo);
 
         }
         [HttpPost,ActionName("Update")]
@@ -217,55 +217,55 @@ namespace sssHMS.Controllers
             {
                 string webRootPath = hostingEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
-                var HospitalFromDb = db.HospitalInfos.Where(a => a.HospitalId == HospitalInfo.HospitalId).FirstOrDefault();
+                var sssHMSFromDb = db.sssHMSInfos.Where(a => a.sssHMSId == sssHMSInfo.sssHMSId).FirstOrDefault();
 
                 if(files.Count>0 && files[0]!=null)
                 {
-                    var uploads = Path.Combine(webRootPath, SD.HospitalImageFolder);
+                    var uploads = Path.Combine(webRootPath, SD.sssHMSImageFolder);
                     var extension_new = Path.GetExtension(files[0].FileName);
-                    var extension_old = Path.GetExtension(HospitalFromDb.HospitalImage);
+                    var extension_old = Path.GetExtension(sssHMSFromDb.sssHMSImage);
 
-                    if(System.IO.File.Exists(Path.Combine(uploads,HospitalInfo.HospitalId+extension_old)))
+                    if(System.IO.File.Exists(Path.Combine(uploads,sssHMSInfo.sssHMSId+extension_old)))
                     {
-                        System.IO.File.Delete(Path.Combine(uploads, HospitalInfo.HospitalId + extension_old));
+                        System.IO.File.Delete(Path.Combine(uploads, sssHMSInfo.sssHMSId + extension_old));
 
                     }
-                    using (var filestream = new FileStream(Path.Combine(uploads, HospitalInfo.HospitalId + extension_new), FileMode.Create))
+                    using (var filestream = new FileStream(Path.Combine(uploads, sssHMSInfo.sssHMSId + extension_new), FileMode.Create))
                     {
                         files[0].CopyTo(filestream);
                     }
-                    HospitalInfo.HospitalImage = @"\" + SD.HospitalImageFolder + @"\" + HospitalInfo.HospitalId + extension_new;
+                    sssHMSInfo.sssHMSImage = @"\" + SD.sssHMSImageFolder + @"\" + sssHMSInfo.sssHMSId + extension_new;
 
                 }
                 
-                HospitalFromDb.HospitalName = HospitalInfo.HospitalName;
-                HospitalFromDb.HospitalCode = HospitalInfo.HospitalCode;
-                HospitalFromDb.HospitalAddress = HospitalInfo.HospitalAddress;
-                HospitalFromDb.HospitalPhoneNo1 = HospitalInfo.HospitalPhoneNo1;
-                HospitalFromDb.HospitalPhoneNo2 = HospitalInfo.HospitalPhoneNo2;
-                HospitalFromDb.HospitalPhoneNo3 = HospitalInfo.HospitalPhoneNo3;
-                HospitalFromDb.HospitalPhoneNo4 = HospitalInfo.HospitalPhoneNo4;
-                HospitalFromDb.HospitalEmail = HospitalInfo.HospitalEmail;
-                HospitalFromDb.HospitalWebsite = HospitalInfo.HospitalWebsite;
-                if (HospitalInfo.HospitalImage != null)
+                sssHMSFromDb.sssHMSName = sssHMSInfo.sssHMSName;
+                sssHMSFromDb.sssHMSCode = sssHMSInfo.sssHMSCode;
+                sssHMSFromDb.sssHMSAddress = sssHMSInfo.sssHMSAddress;
+                sssHMSFromDb.sssHMSPhoneNo1 = sssHMSInfo.sssHMSPhoneNo1;
+                sssHMSFromDb.sssHMSPhoneNo2 = sssHMSInfo.sssHMSPhoneNo2;
+                sssHMSFromDb.sssHMSPhoneNo3 = sssHMSInfo.sssHMSPhoneNo3;
+                sssHMSFromDb.sssHMSPhoneNo4 = sssHMSInfo.sssHMSPhoneNo4;
+                sssHMSFromDb.sssHMSEmail = sssHMSInfo.sssHMSEmail;
+                sssHMSFromDb.sssHMSWebsite = sssHMSInfo.sssHMSWebsite;
+                if (sssHMSInfo.sssHMSImage != null)
                 {
-                    HospitalFromDb.HospitalImage = HospitalInfo.HospitalImage;
+                    sssHMSFromDb.sssHMSImage = sssHMSInfo.sssHMSImage;
                 }
 
-                //db.HospitalInfos.Update(HospitalInfo);
+                //db.sssHMSInfos.Update(sssHMSInfo);
                 await db.SaveChangesAsync();
                 return Redirect(returnUrl);
             }
-            return View(HospitalInfo);
+            return View(sssHMSInfo);
         }
 
         public async Task<IActionResult> Detail(int id)
         {
-            var hospital = await db.HospitalInfos.FindAsync(id);
-            //HospitalInfo=db.HospitalInfos.FirstOrDefault();
-            //ViewBag.HospitalId = HospitalInfo.HospitalId;
+            var sssHMS = await db.sssHMSInfos.FindAsync(id);
+            //sssHMSInfo=db.sssHMSInfos.FirstOrDefault();
+            //ViewBag.sssHMSId = sssHMSInfo.sssHMSId;
             ViewBag.returnUrl = Request.Headers["referer"].ToString();
-            return View(hospital);
+            return View(sssHMS);
         }
 
         [HttpPost, ActionName("Detail")]
@@ -277,9 +277,9 @@ namespace sssHMS.Controllers
 
         public IActionResult Delete(int id)
         {
-            var hospitalInfo = db.HospitalInfos.Find(id);
+            var sssHMSInfo = db.sssHMSInfos.Find(id);
             ViewBag.returnUrl = Request.Headers["referer"].ToString();
-            return View(hospitalInfo);
+            return View(sssHMSInfo);
         }
         [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -288,12 +288,12 @@ namespace sssHMS.Controllers
             ViewBag.returnUrl = returnUrl;
             if(ModelState.IsValid)
             {
-                var delID = await db.HospitalInfos.FindAsync(id);
-                db.HospitalInfos.Remove(delID);
+                var delID = await db.sssHMSInfos.FindAsync(id);
+                db.sssHMSInfos.Remove(delID);
                 await db.SaveChangesAsync();
                 return Redirect(returnUrl);
             }
-            return View(HospitalInfo);
+            return View(sssHMSInfo);
         }
     }
 }

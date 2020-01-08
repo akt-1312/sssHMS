@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace sssHMS.Models.ViewModels
 {
-    public class HospitalInfoViewModel
+    public class sssHMSInfoViewModel
     {
-        public List<HospitalInfo> HospitalInfos { get; set; }
+        public List<sssHMSInfo> sssHMSInfos { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }

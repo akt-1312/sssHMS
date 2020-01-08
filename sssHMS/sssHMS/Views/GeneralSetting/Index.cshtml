@@ -1,4 +1,4 @@
-﻿@model sssHMS.Models.ViewModels.HospitalInfoViewModel
+﻿@model sssHMS.Models.ViewModels.sssHMSInfoViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -228,7 +228,7 @@
                 <div class="row wrapper">
                     <div class="col-md-2">
                         <select id="DoctorName" name="searchField"
-                                asp-items="@ViewBag.Hospitals"
+                                asp-items="@ViewBag.sssHMSs"
                                 class="form-control"></select>
                     </div>
 
@@ -254,7 +254,7 @@
     <div class="container-fluid" style="margin-top:10px; background-color:aliceblue;position:relative;">
         <div class="row" style="padding-top:10px;">
             <div class="col-md-8">
-                <a asp-action="Create" class="btn btn-primary mb-3 p-3 fa fa-plus-square" asp-route-returnUrl="@ViewBag.returnUrl">&nbsp; Add New Hospital Info</a>
+                <a asp-action="Create" class="btn btn-primary mb-3 p-3 fa fa-plus-square" asp-route-returnUrl="@ViewBag.returnUrl">&nbsp; Add New sssHMS Info</a>
             </div>
             <div class="form-row col-md-4" style="width:170px; position:absolute;right:0; margin:0;">
                 <div>
@@ -274,7 +274,7 @@
                         <tr class="text-center">
 
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalName)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSName)
 
                                 @if (ViewBag.sortParamView == "SortDec")
                                 {
@@ -291,19 +291,19 @@
 
                             </th>
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalCode)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSCode)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalAddress)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSAddress)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalPhoneNo1)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSPhoneNo1)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalEmail)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSEmail)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(m => m.HospitalInfos.FirstOrDefault().HospitalWebsite)
+                                @Html.DisplayNameFor(m => m.sssHMSInfos.FirstOrDefault().sssHMSWebsite)
                             </th>
 
                             <th style="width:41px; border:none;"></th>
@@ -321,24 +321,24 @@
                         }
                         else
                         {
-                            @foreach (var item in Model.HospitalInfos)
+                            @foreach (var item in Model.sssHMSInfos)
                             {
                     <tr>
                         <td>
-                            @item.HospitalName
+                            @item.sssHMSName
                         </td>
                         <td>
-                            @item.HospitalCode
+                            @item.sssHMSCode
                         </td>
                         <td>
-                            @item.HospitalAddress
+                            @item.sssHMSAddress
                         </td>
                         <td>
                             @{ 
-                                string ph1 = item.HospitalPhoneNo1;
-                                string ph2 = item.HospitalPhoneNo2;
-                                string ph3 = item.HospitalPhoneNo3;
-                                string ph4 = item.HospitalPhoneNo4;
+                                string ph1 = item.sssHMSPhoneNo1;
+                                string ph2 = item.sssHMSPhoneNo2;
+                                string ph3 = item.sssHMSPhoneNo3;
+                                string ph4 = item.sssHMSPhoneNo4;
 
                                 if ((ph1 != null||ph2!=null||ph3!=null)&& ph4!=null)
                                 {
@@ -357,26 +357,26 @@
                             @string.Format("{0}{1}{2}{3}",ph1,ph2,ph3,ph4)
                         </td>
                         <td>
-                            @item.HospitalEmail
+                            @item.sssHMSEmail
                         </td>
                         <td>
-                            @item.HospitalWebsite
+                            @item.sssHMSWebsite
                         </td>
 
 
                         <td class="text-center">
 
-                            <a asp-action="Update" class="btn btn-primary btnEdit" asp-route-id="@item.HospitalId"><i class="fa fa-edit fa-sm"></i></a>
+                            <a asp-action="Update" class="btn btn-primary btnEdit" asp-route-id="@item.sssHMSId"><i class="fa fa-edit fa-sm"></i></a>
                         </td>
 
                         <td class="text-center">
 
-                            <a asp-action="Delete" asp-route-id="@item.HospitalId" class="btn btn-danger btnDel"><i class="fa fa-trash-alt fa-sm"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.sssHMSId" class="btn btn-danger btnDel"><i class="fa fa-trash-alt fa-sm"></i></a>
 
                         </td>
                         <td class="text-center">
 
-                            <a asp-action="Detail" asp-route-id="@item.HospitalId" class="btn btn-secondary btnDel"><i class="fa fa-ellipsis-h fa-sm"></i></a>
+                            <a asp-action="Detail" asp-route-id="@item.sssHMSId" class="btn btn-secondary btnDel"><i class="fa fa-ellipsis-h fa-sm"></i></a>
 
                         </td>
                     </tr>

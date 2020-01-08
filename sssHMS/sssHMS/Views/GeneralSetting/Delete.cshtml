@@ -1,4 +1,4 @@
-﻿@model sssHMS.Models.HospitalInfo
+﻿@model sssHMS.Models.sssHMSInfo
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,25 +14,25 @@
 }
 
 
-<h3>Create Hospital Info</h3>
+<h3>Create sssHMS Info</h3>
 
 <form method="post" enctype="multipart/form-data">    
-    <input hidden asp-for="HospitalId" />
+    <input hidden asp-for="sssHMSId" />
     <input hidden name="returnUrl" value="@ViewBag.returnUrl" />
     <div class="row">
         <div class="form-group col-8">
             <div class="row my-3">
                 <div class="col-2 offset-2">
-                    <div><label asp-for="HospitalName" class="control-label">Name&CODE</label></div>
+                    <div><label asp-for="sssHMSName" class="control-label">Name&CODE</label></div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input readonly asp-for="HospitalName" class="form-control" />
+                        <input readonly asp-for="sssHMSName" class="form-control" />
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input readonly asp-for="HospitalCode" class="form-control" />
+                        <input readonly asp-for="sssHMSCode" class="form-control" />
                         
                     </div>
                 </div>
@@ -41,12 +41,12 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalAddress" class="control-label"></label>
+                        <label asp-for="sssHMSAddress" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <textarea readonly id="txtArea" asp-for="HospitalAddress" class="form-control"></textarea>
+                        <textarea readonly id="txtArea" asp-for="sssHMSAddress" class="form-control"></textarea>
                         
                     </div>
                 </div>
@@ -54,17 +54,17 @@
 
             <div class="row my-3">
                 <div class="col-2 offset-2">
-                    <div><label asp-for="HospitalPhoneNo1"></label></div>
+                    <div><label asp-for="sssHMSPhoneNo1"></label></div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input readonly id="txtPh1" asp-for="HospitalPhoneNo1" class="form-control" />
+                        <input readonly id="txtPh1" asp-for="sssHMSPhoneNo1" class="form-control" />
                         
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input readonly asp-for="HospitalPhoneNo2" class="form-control" />
+                        <input readonly asp-for="sssHMSPhoneNo2" class="form-control" />
                         
                     </div>
                 </div>
@@ -73,13 +73,13 @@
             <div class="row my-3">
                 <div class="col-4 offset-4">
                     <div>
-                        <input readonly asp-for="HospitalPhoneNo3" class="form-control" />
+                        <input readonly asp-for="sssHMSPhoneNo3" class="form-control" />
                         
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input readonly asp-for="HospitalPhoneNo4" class="form-control" />
+                        <input readonly asp-for="sssHMSPhoneNo4" class="form-control" />
                         
                     </div>
                 </div>
@@ -88,12 +88,12 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalEmail" class="control-label"></label>
+                        <label asp-for="sssHMSEmail" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <input readonly asp-for="HospitalEmail" class="form-control" />
+                        <input readonly asp-for="sssHMSEmail" class="form-control" />
                         
                     </div>
                 </div>
@@ -102,12 +102,12 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalWebsite" class="control-label"></label>
+                        <label asp-for="sssHMSWebsite" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <input readonly asp-for="HospitalWebsite" class="form-control" />
+                        <input readonly asp-for="sssHMSWebsite" class="form-control" />
                         
                     </div>
                 </div>
@@ -115,7 +115,7 @@
             <div class="row">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalImage" class="control-label"></label>
+                        <label asp-for="sssHMSImage" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
@@ -128,7 +128,7 @@
         </div>
         <div class="col-4 my-3">
             <div>
-                <img src="@Model.HospitalImage" style="width:120px; height:120px; border-radius:60px; border:1px solid #bbb9b9;" />
+                <img src="@Model.sssHMSImage" style="width:120px; height:120px; border-radius:60px; border:1px solid #bbb9b9;" />
             </div>
         </div>
     </div>

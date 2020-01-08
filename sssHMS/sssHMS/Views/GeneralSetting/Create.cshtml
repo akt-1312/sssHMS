@@ -1,4 +1,4 @@
-﻿@model sssHMS.Models.HospitalInfo
+﻿@model sssHMS.Models.sssHMSInfo
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +14,7 @@
 }
 
 
-<h3>Create Hospital Info</h3>
+<h3>Create sssHMS Info</h3>
 
 <form method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly"></div>
@@ -27,14 +27,14 @@
                 </div>
                 <div class="col-4">
                     <div>
-                        <input asp-for="HospitalName" class="form-control" />
-                        <span asp-validation-for="HospitalName" class="text-danger"></span>
+                        <input asp-for="sssHMSName" class="form-control" />
+                        <span asp-validation-for="sssHMSName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input asp-for="HospitalCode" class="form-control" />
-                        <span asp-validation-for="HospitalCode" class="text-danger"></span>
+                        <input asp-for="sssHMSCode" class="form-control" />
+                        <span asp-validation-for="sssHMSCode" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -42,31 +42,31 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalAddress" class="control-label"></label>
+                        <label asp-for="sssHMSAddress" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <textarea id="txtArea" asp-for="HospitalAddress" class="form-control"></textarea>
-                        <span asp-validation-for="HospitalAddress" class="text-danger"></span>
+                        <textarea id="txtArea" asp-for="sssHMSAddress" class="form-control"></textarea>
+                        <span asp-validation-for="sssHMSAddress" class="text-danger"></span>
                     </div>
                 </div>
             </div>
 
             <div class="row my-3">
                 <div class="col-2 offset-2">
-                    <div><label asp-for="HospitalPhoneNo1"></label></div>
+                    <div><label asp-for="sssHMSPhoneNo1"></label></div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input id="txtPh1" asp-for="HospitalPhoneNo1" class="form-control" />
-                        <span asp-validation-for="HospitalPhoneNo1" class="text-danger"></span>
+                        <input id="txtPh1" asp-for="sssHMSPhoneNo1" class="form-control" />
+                        <span asp-validation-for="sssHMSPhoneNo1" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input asp-for="HospitalPhoneNo2" class="form-control" />
-                        <span asp-validation-for="HospitalPhoneNo2" class="text-danger"></span>
+                        <input asp-for="sssHMSPhoneNo2" class="form-control" />
+                        <span asp-validation-for="sssHMSPhoneNo2" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -74,14 +74,14 @@
             <div class="row my-3">
                 <div class="col-4 offset-4">
                     <div>
-                        <input asp-for="HospitalPhoneNo3" class="form-control" />
-                        <span asp-validation-for="HospitalPhoneNo3" class="text-danger"></span>
+                        <input asp-for="sssHMSPhoneNo3" class="form-control" />
+                        <span asp-validation-for="sssHMSPhoneNo3" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        <input asp-for="HospitalPhoneNo4" class="form-control" />
-                        <span asp-validation-for="HospitalPhoneNo4" class="text-danger"></span>
+                        <input asp-for="sssHMSPhoneNo4" class="form-control" />
+                        <span asp-validation-for="sssHMSPhoneNo4" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -89,13 +89,13 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalEmail" class="control-label"></label>
+                        <label asp-for="sssHMSEmail" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <input asp-for="HospitalEmail" class="form-control" />
-                        <span asp-validation-for="HospitalEmail" class="text-danger"></span>
+                        <input asp-for="sssHMSEmail" class="form-control" />
+                        <span asp-validation-for="sssHMSEmail" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -103,26 +103,26 @@
             <div class="row my-3">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalWebsite" class="control-label"></label>
+                        <label asp-for="sssHMSWebsite" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
-                        <input asp-for="HospitalWebsite" class="form-control" />
-                        <span asp-validation-for="HospitalWebsite" class="text-danger"></span>
+                        <input asp-for="sssHMSWebsite" class="form-control" />
+                        <span asp-validation-for="sssHMSWebsite" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-2 offset-2">
                     <div>
-                        <label asp-for="HospitalImage" class="control-label"></label>
+                        <label asp-for="sssHMSImage" class="control-label"></label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div>
                         <input name="files" type="file" multiple class="form-control" />
-                        <span asp-validation-for="HospitalWebsite" class="text-danger"></span>
+                        <span asp-validation-for="sssHMSWebsite" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $("#HospitalName").focus();
+            $("#sssHMSName").focus();
             $("#btnSave").click(function () {
                 $("form").submit();
             });

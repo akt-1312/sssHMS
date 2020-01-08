@@ -9,7 +9,7 @@ namespace sssHMS.Utility
     {
         public const string DefaultProductImage = "Photo.jpg";
         public const string ImageFolder = @"Images/DoctorImage";
-        public const string DefaultHospitalImage = "HealthyLife.jpg";
-        public const string HospitalImageFolder = @"Images\HospitalImages";
+        public const string DefaultsssHMSImage = "HealthyLife.jpg";
+        public const string sssHMSImageFolder = @"Images\sssHMSImages";
     }
 }

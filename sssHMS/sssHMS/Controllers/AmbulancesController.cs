@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Hospital.Models;
+using sssHMS.Models;
 using sssHMS.Data;
 
-namespace Hospital.Controllers
+namespace sssHMS.Controllers
 {
     public class AmbulancesController : Controller
     {

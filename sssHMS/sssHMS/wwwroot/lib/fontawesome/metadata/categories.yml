@@ -260,8 +260,8 @@ buildings:
     - dungeon
     - gopuram
     - home
-    - hospital
-    - hospital-alt
+    - sssHMS
+    - sssHMS-alt
     - hotel
     - house-damage
     - igloo
@@ -1054,7 +1054,7 @@ health:
     - h-square
     - heart
     - heartbeat
-    - hospital
+    - sssHMS
     - medkit
     - plus-square
     - prescription
@@ -1382,7 +1382,7 @@ maps:
     - heartbeat
     - helicopter
     - home
-    - hospital
+    - sssHMS
     - image
     - images
     - industry
@@ -1536,9 +1536,9 @@ medical:
     - first-aid
     - heart
     - heartbeat
-    - hospital
-    - hospital-alt
-    - hospital-symbol
+    - sssHMS
+    - sssHMS-alt
+    - sssHMS-symbol
     - id-card-alt
     - joint
     - laptop-medical
@@ -1713,7 +1713,7 @@ objects:
     - highlighter
     - holly-berry
     - home
-    - hospital
+    - sssHMS
     - hourglass
     - igloo
     - image
