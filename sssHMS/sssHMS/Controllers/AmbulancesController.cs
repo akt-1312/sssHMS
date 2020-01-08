@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Hospital.Data;
 using Hospital.Models;
+using sssHMS.Data;
 
 namespace Hospital.Controllers
 {
