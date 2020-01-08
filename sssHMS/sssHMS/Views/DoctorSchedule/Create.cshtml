@@ -46,7 +46,7 @@
 
     <div class="row selectRow">
         <div asp-validation-summary="ModelOnly"></div>
-        <input id="returnUrlID" hidden name="returnUrl" value="@ViewBag.returnUrl" />
+        <input id="returnUrl" hidden name="returnUrl" value="@ViewBag.returnUrl" />
         <div hidden class="form-group col-md-3">
             <label asp-for="DoctorID" class="control-label"></label>
             <select id="DoctorID" asp-for="DoctorID"
@@ -194,9 +194,11 @@
 
 
         $(document).ready(function () {
-            $("#btnTest").click(function () {
-                alert("Ok");
-            });
+            //$("#btnTest").click(function () {
+            //    alert("Ok");
+            //});
+            //var returnUrl = $("#returnUrl").val();
+            //    alert(returnUrl);
 
             $("#btnAdd").click(function () {
                 var y = $("#DoctorName :selected").text();
@@ -233,7 +235,7 @@
             });
 
             $("#DoctorName").change(function () {
-                var returnUrl = $("#retrunUrlID").val();
+                var returnUrl = $("#returnUrl").val();
                 //alert(returnUrl);
                 var select = $("#DoctorName option:selected").val();
                 //alert(select);
@@ -270,7 +272,7 @@
 
 
             $("form").on("click", "#btnSave", function () {
-                var returnUrl1 = $("#returnUrlID").val();
+                var returnUrl1 = $("#returnUrl").val();
                 
                 //Loop through the Table rows and build a JSON array.
                 var customers = new Array();
